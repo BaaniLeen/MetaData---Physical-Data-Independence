@@ -1,0 +1,4 @@
+Name C 45
+Roll_No I 10
+Outside_Delhi_Status C 5
+OBC C 4
