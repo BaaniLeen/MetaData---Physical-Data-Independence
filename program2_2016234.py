@@ -10,21 +10,33 @@ for line in metadata:
 	line=line[:-1] #Removes the trailing \n
 	mylist=line.split()
 	final_metadata.append(mylist)
+	# print mylist
 # print final_metadata
 metadata.close()
 
 Data_final=[]
+mylist=[]
+
+#print final_metadata[2][2]
 
 sample_file =open('Db_2016234','r')
 for line in sample_file:
-	line=line[:-1] #Removes the trailing \n
-	mylist=line.split(",")
+	line=line.replace("'","") #Removes the extra 's
+	arr=list(line)
+	arr=arr[:-1] #Removes the trailing \n
+	a=""
+	counter_size=0
 	Data={}
 	for i in range(0,len(final_metadata)):
-		Data[final_metadata[i][0]]=mylist[i]
+		size=int(final_metadata[i][2])
+		a=""
+		while(counter_size<len(arr) and arr[counter_size]!=','):
+			a+=str(arr[counter_size])
+			counter_size+=1
+		counter_size+=1
+		Data[final_metadata[i][0]]=a
 	Data_final.append(Data)
-	
-# print Data_final
+#print Data_final
 
 #OUTCOME 1
 # Printing the data in the file in the same format
@@ -50,15 +62,18 @@ for item in Data_final:
 	for i in range(0,len(final_metadata)):
 		if(final_metadata[i][len(final_metadata[i])-1]>=0):
 			final_metadata[i][len(final_metadata[i])-1]=int(final_metadata[i][len(final_metadata[i])-1])+int(item[final_metadata[i][0]])
-
 print ""
 
-print 'OUTCOME2: Printing the Sums of the various fields\n'
+name = raw_input()
+
+print 'OUTCOME2: Printing the Sums of the given field '+name+':\n'
 for i in range(0,len(final_metadata)):
-	if(final_metadata[i][len(final_metadata[i])-1]==-1):
-		print final_metadata[i][0]+' '+'Non-Numeric Field'
-	else:
-		print final_metadata[i][0]+' '+str(final_metadata[i][len(final_metadata[i])-1])
+	if(final_metadata[i][0]==name):
+		if(final_metadata[i][len(final_metadata[i])-1]==-1):
+			print 'Non-Numeric Field'
+		else:
+			print str(final_metadata[i][len(final_metadata[i])-1])
 print ""
+# print final_metadata
 
 print "Execution time : --- %s seconds ---\n" % (time.time() - start_time)

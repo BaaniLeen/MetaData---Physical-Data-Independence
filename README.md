@@ -16,5 +16,3 @@ In both the cases, program1 fails while program2, using the metafile runs succes
 Made By :
 
 Baani Leen Kaur
-
-Suhavi Bansal

@@ -2,6 +2,7 @@ import time
 
 start_time = time.time()
 
+#sample_file =open('Db_2016234','r')
 sample_file =open('Db_2016234','r')
 
 Data_final=[]
